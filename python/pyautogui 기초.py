@@ -3,10 +3,12 @@ import time
 
 # pyautogui.position() -- 마우스 커서 위치 조회
 
+print(pyautogui.position())
+
 # pyautogui.moveTo(30, 136, 2)
 
 # pyautogui.click(clicks=2, interval=2)     # clicks = 2번 클릭, interval = 2초 뒤에 다시
-# pyautogui.click(clicks=2)
+# pyautogui.click(clicks=2)                 # 클릭은 moveTo안해도 이동하여 실행함.
 
 pyautogui.moveTo(1666, 178, 2)
 
