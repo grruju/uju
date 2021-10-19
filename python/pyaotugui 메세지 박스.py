@@ -6,6 +6,7 @@ btn1 = pyautogui.alert('경고','title','OKOK')
 print(btn1)
 print(type(btn1))
 
+
 # 2.
 btn2 = pyautogui.alert(text='경고',button='OJOJ',title='title')
 print(btn1)

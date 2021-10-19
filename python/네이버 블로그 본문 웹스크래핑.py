@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import quote
+from urllib.parse import quote, quote_plus
 import re
 from requests.api import post, request
 
@@ -34,24 +34,28 @@ def text_scraping(url):
         return "확인불가"
 
 
-query = 'sk하이닉스'
-url = 'https://search.naver.com/search.naver?where=view&sm=tab_jum&query=' + quote(query)
+query = input('검색어를 입력하세요 : ')
+# url = 'https://search.naver.com/search.naver?where=view&sm=tab_jum&query=' + quote(query)
+
+url = 'https://search.naver.com/search.naver?query='+quote_plus(query)+'&nso=&where=blog&sm=tab_opt'
+
+print(url)
 
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"}
 res = requests.get(url, headers=headers)
 
-soup = BeautifulSoup(res.text, 'lxml')
+soup = BeautifulSoup(res.text, 'html.parser')
 
-posts = soup.find_all("li", attrs={"class":"bx _svp_item"})
+posts = soup.select("ul.lst_total > li")
 
-
+print(posts)
 n  = 0
 for post in posts:
     n += 1
     print(n)
-    post_title = post.find("a", attrs={"class":"api_txt_lines total_tit _cross_trigger"}).get_text()
+    post_title = post.select_one("a.api_txt_lines.total_tit").get_text()
     print("제목 : ",post_title)
-    post_link = post.find("a", attrs={"class":"api_txt_lines total_tit _cross_trigger"})['href']
+    post_link = post.select_one("a.api_txt_lines.total_tit")['href']
     print("링크 : ",post_link)
 
     blog_p = re.compile("blog.naver.com")
