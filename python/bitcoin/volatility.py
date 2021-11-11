@@ -8,7 +8,7 @@ def get_target_price(ticker):
     today_open = yesterday['close']
     yesterday_high = yesterday['high']
     yesterday_low = yesterday['low']
-    target = today_open + (yesterday_high - yesterday_low) * 0.5
+    target = today_open + (yesterday_high - yesterday_low) * 0.45   # 0.5에서 0.45로 변경
     return target
 
 def buy_crypto_currency(bithumb, ticker):

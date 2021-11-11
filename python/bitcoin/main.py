@@ -21,12 +21,19 @@ class VolatilityWorker(QThread):
         mid = datetime.datetime(now.year, now.month, now.day) + datetime.timedelta(1)
         ma5 = get_yesterday_ma5(self.ticker)
         target_price = get_target_price(self.ticker)
+        maxtarget_price = target_price + (target_price*0.0003)
+        sel_price = target_price + (target_price * 0.02)
         wait_flag = False
+        print("wait_flag :", wait_flag)
         print("target price :", target_price)
+        print("maxtarget_price :", maxtarget_price)
+        print("sel_price :", sel_price)
+
         while self.alive:
             try:
                 now = datetime.datetime.now()
-                if mid < now < mid + datetime.delta(seconds=10):
+                if mid + datetime.timedelta(seconds=10) >= now >= mid :
+                    print("자정입니다.")
                     target_price = get_target_price(self.ticker)
                     mid = datetime.datetime(now.year, now.month, now.day) + datetime.timedelta(1)
                     ma5 = get_yesterday_ma5(self.ticker)
@@ -41,7 +48,8 @@ class VolatilityWorker(QThread):
 
                 if wait_flag == False:
                     current_price = pybithumb.get_current_price(self.ticker)
-                    if (current_price > target_price) and (current_price > ma5):
+                    # if (current_price > target_price) and (current_price > ma5):
+                    if (current_price > target_price) and (current_price > ma5) and (maxtarget_price > current_price):
                         desc = buy_crypto_currency(self.bithumb, self.ticker)
                         result = self.bithumb.get_order_completed(desc)
                         timestamp = result['data']['order_date']
@@ -49,6 +57,18 @@ class VolatilityWorker(QThread):
                         tstring = dt.strftime("%Y/%m/%d %H:%M:%S")
                         self.tradingSent.emit(tstring, "매수", result['data']['order_qty'])
                         wait_flag = True
+
+                if wait_flag == True:       # 0.7%이익을 보기 위해 신규 추가
+                    current_price = pybithumb.get_current_price(self.ticker)
+                    if (current_price > target_price) and (current_price > sel_price):
+                        desc = sell_crypto_currency(self.bithumb, self.ticker)
+
+                        result = self.bithumb.get_order_completed(desc)
+                        timestamp = result['data']['order_date']
+                        dt = datetime.datetime.fromtimestamp( int(int(timestamp)/1000000) )
+                        tstring = dt.strftime("%Y/%m/%d %H:%M:%S")
+                        self.tradingSent.emit(tstring, "매도", result['data']['order_qty'])
+                        wait_flag = False
             except:
                 pass
             time.sleep(1)
@@ -56,17 +76,17 @@ class VolatilityWorker(QThread):
     def close(self):
         self.alive = False
 
-form_class = uic.loadUiType("./python/bitcoin/main.ui")[0]
+form_class = uic.loadUiType("C:/Users/river/GrrUJU/uju/python/bitcoin/main.ui")[0]
 
 class MainWindow(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.ticker = "NU"
+        self.ticker = "eth"
         self.button.clicked.connect(self.clickBtn)
         self.setWindowTitle("Home Trading System")
 
-        with open("./python/bitcoin/bithumb.txt") as f:
+        with open("C:/Users/river/GrrUJU/uju/python/bitcoin/bithumb.txt") as f:
             lines = f.readlines()
             apikey = lines[0].strip()
             seckey = lines[1].strip()
@@ -90,6 +110,7 @@ class MainWindow(QMainWindow, form_class):
             self.button.setText("매매중지")
             self.textEdit.append("------ START ------")
             self.textEdit.append(f"보유 현금 : {self.balance[2]} 원")
+            
 
             self.vw = VolatilityWorker(self.ticker, self.bithumb)
             self.vw.tradingSent.connect(self.receiveTradingSignal)

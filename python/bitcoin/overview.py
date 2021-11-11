@@ -37,9 +37,9 @@ class OverViewWorker(QThread):
 
 
 class OverviewWidget(QWidget):
-    def __init__(self, parent=None, ticker="NU", ):
+    def __init__(self, parent=None, ticker="ETH", ):
         super().__init__(parent)
-        uic.loadUi("./python/bitcoin/overview.ui", self)
+        uic.loadUi("C:/Users/river/GrrUJU/uju/python/bitcoin/overview.ui", self)
 
         self.ticker = ticker
         self.ovw = OverViewWorker(ticker)

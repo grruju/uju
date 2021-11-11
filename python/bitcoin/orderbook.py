@@ -26,9 +26,9 @@ class OrderbookWorker(QThread):
 
 
 class OrderbookWidget(QWidget):
-    def __init__(self, parent=None, ticker="NU"):
+    def __init__(self, parent=None, ticker="ETH"):
         super().__init__(parent)
-        uic.loadUi("./python/bitcoin/orderbook.ui", self)
+        uic.loadUi("C:/Users/river/GrrUJU/uju/python/bitcoin/orderbook.ui", self)
         self.ticker = ticker
 
         self.asksAnim = [ ]
@@ -95,7 +95,7 @@ class OrderbookWidget(QWidget):
             item_1 = self.tableAsks.item(i, 1)
             item_1.setText(f"{v['quantity']:,}")
             item_2 = self.tableAsks.cellWidget(i, 2)
-            item_2.setRange(0, maxtradingValue)
+            item_2.setRange(0, maxtradingValue/1000)        # maxsize overflow로 인해 1000 나눔
             item_2.setFormat(f"{tradingAskValues[i]:,}")
             self.asksAnim[i].setStartValue(item_2.value() if item_2.value() > 0 else 0)
             self.asksAnim[i].setEndValue(tradingAskValues[i])
@@ -107,7 +107,7 @@ class OrderbookWidget(QWidget):
             item_1 = self.tableBids.item(i, 1)
             item_1.setText(f"{v['quantity']:,}")
             item_2 = self.tableBids.cellWidget(i, 2)
-            item_2.setRange(0, maxtradingValue)
+            item_2.setRange(0, maxtradingValue/1000)        # maxsize overflow로 인해 1000 나눔
             item_2.setFormat(f"{tradingBidValues[i]:,}")
             self.bidsAnim[i].setStartValue(item_2.value())
             self.bidsAnim[i].setEndValue(tradingBidValues[i])

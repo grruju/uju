@@ -27,9 +27,9 @@ class PriceWorker(QThread):
         self.alive = False
 
 class ChartWidget(QWidget):
-    def __init__(self, parent=None, ticker="NU"):
+    def __init__(self, parent=None, ticker="ETH"):
         super().__init__(parent)
-        uic.loadUi("./python/bitcoin/chart.ui", self)
+        uic.loadUi("C:/Users/river/GrrUJU/uju/python/bitcoin/chart.ui", self)
         self.ticker = ticker
         self.viewLimit = 128
 
