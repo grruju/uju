@@ -1,0 +1,37 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:c="sap.ui.core">
+    <Dialog
+        afterOpen="onAfterOpen"
+        beforeOpen="onBeforeOpen"
+        draggable="true"
+        escapeHandler=""
+        horizontalScrolling="true"
+        icon="sap-icon://pdf-attachment"
+        resizable="false"
+        showHeader="true"
+        state="None"
+        stretch="false"
+        title="PDF Dialog"
+        titleAlignment="Auto"
+        type="Standard"
+        verticalScrolling="true">
+        <VBox class="sapUiSmallMargin">
+            <mvc:HTMLView 
+                id="nestedViewhtml"
+                viewName="sap.btp.usetemplate.view.html.test">
+            </mvc:HTMLView>
+        </VBox>
+        <buttons>
+            <Button
+                icon="sap-icon://download"
+                type="Accept"
+                text="출력"
+                press="onDownload"/>
+            <Button 
+                text="닫기"
+                press="onDialogClose($event, 'PDFDialog')"/>
+        </buttons>
+    </Dialog>
+</c:FragmentDefinition>

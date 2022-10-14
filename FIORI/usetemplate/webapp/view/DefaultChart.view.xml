@@ -1,0 +1,55 @@
+<mvc:View
+	controllerName="sap.btp.usetemplate.controller.DefaultChart"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	displayBlock="true"
+	height="100%"
+>
+	<Page
+		title="제품별 판매 현황"
+		class="sapUiContentPadding sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+		showNavButton="true"
+		navButtonPress="onNavBackPress" >
+		<headerContent>
+			<Button 
+				icon="{app>/screenSizeButton}"
+				type="Transparent"
+				tooltip="{i18n>main.button.fullscreen}"
+				press="onResizeScreenPress"/>
+		</headerContent>
+		<subHeader>
+			<Toolbar>
+				<core:Icon
+					src="sap-icon://bar-chart"
+					color="Marker"
+					class="sapUiTinyMarginEnd" />
+				<Text text="Default Chart" />
+			</Toolbar>
+		</subHeader>
+		<content>
+			<Panel>
+				<content>
+
+					<!-- Chart Fragment 추가 -->
+					<core:Fragment fragmentName="sap.btp.usetemplate.view.fragment.chart" type="XML" />
+			
+				</content>
+				<headerToolbar>
+				</headerToolbar>
+				<infoToolbar>
+				</infoToolbar>
+			</Panel>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<Button 
+					type="Back"
+					text="이전" 
+					press="onNavBackPress"/>
+				<ToolbarSpacer/>
+				
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

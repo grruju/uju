@@ -1,0 +1,261 @@
+<mvc:View controllerName="sap.btp.usetemplate.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:core="sap.ui.core"
+    height="100%">
+    <f:DynamicPage>
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="템플릿 모음"/>
+                </f:heading>
+
+                <f:content>
+
+                </f:content>
+
+                <f:navigationActions>
+                    <Button 
+                        icon="{app>/screenSizeButton}"
+                        type="Transparent"
+                        tooltip="{i18n>main.button.fullscreen}"
+                        press="onResizeScreenPress"/>
+                </f:navigationActions>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <!-- DynamicPage Header -->
+        <f:header>
+        
+        </f:header>
+        <f:content>
+            <Panel width="100%" backgroundDesign="Transparent">
+                <headerToolbar>
+                    <Toolbar height="3rem">
+                        <Title text="Use Template" />
+                    </Toolbar>
+                </headerToolbar>
+
+                <!-- Use Fragment Chart Template -->
+                <f:GridList 
+                    inset="true"
+                    headerText="Use Fragment Chart Template">
+                    <f:customLayout>
+                        <grid:GridBoxLayout boxWidth="15rem" />
+                    </f:customLayout>
+
+                    <f:GridListItem>
+                        <VBox height="100%" justifyContent="SpaceBetween">
+                            <layoutData>
+                                <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                            </layoutData>
+                            
+                            <!-- Fragment Chart -->
+                            <VBox class="sapUiSmallMargin">
+                                <HBox alignItems="Center">
+                                    <core:Icon
+                                        src="sap-icon://bar-chart"
+                                        size="2.625rem"
+                                        color="Default"
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginEnd" />
+                                    <Title text="Fragment Chart" wrapping="true"/>
+                                </HBox>
+                                
+                                
+                                <Text 
+                                    text="기본차트 사용 + fragment로 사용" 
+                                    wrapping="true" />
+                            </VBox>
+                            <OverflowToolbar design="Solid" class="sapContrast">
+                                <ToolbarSpacer />
+                                <Button 
+                                    text="이동" 
+                                    type="Transparent"
+                                    press="onNextPage($event, 'DefaultChart')" />
+                            </OverflowToolbar>
+                        </VBox>
+                    </f:GridListItem>
+
+                    <!-- Dynamic Type -->
+                    <f:GridListItem>
+                        <VBox height="100%" justifyContent="SpaceBetween">
+                            <layoutData>
+                                <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                            </layoutData>
+
+                            <VBox class="sapUiSmallMargin">
+                                <HBox alignItems="Center">
+                                    <core:Icon
+                                        src="sap-icon://journey-change"
+                                        size="2.625rem"
+                                        color="Default"
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginEnd" />
+                                    <Title text="Dynamic Type" wrapping="true"/>
+                                </HBox>
+                                
+                                
+                                <Text 
+                                    text="차트 Type을 동적으로 변화" 
+                                    wrapping="true" />
+                            </VBox>
+                            <OverflowToolbar design="Solid" class="sapContrast">
+                                <ToolbarSpacer />
+                                <Button 
+                                    text="이동" 
+                                    type="Transparent"
+                                    press="onNextPage($event, 'DynamicType')">
+                                </Button>
+                            </OverflowToolbar>
+                        </VBox>
+                    </f:GridListItem>
+                </f:GridList>
+
+                <!-- Chart Example Template -->
+                <f:GridList 
+                    inset="true"
+                    headerText="Chart Example Template">
+                    <f:customLayout>
+                        <grid:GridBoxLayout boxWidth="18rem" />
+                    </f:customLayout>
+
+                    <!-- Dynamic Create -->
+                    <f:GridListItem>
+                        <VBox height="100%" justifyContent="SpaceBetween">
+                            <layoutData>
+                                <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                            </layoutData>
+
+                            <VBox class="sapUiSmallMargin">
+                                <HBox alignItems="Center">
+                                    <core:Icon
+                                        src="sap-icon://touch"
+                                        size="2.625rem"
+                                        color="Default"
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginEnd" />
+                                    <Title text="Dynamic Create Chart" wrapping="true"/>
+                                </HBox>
+                                
+                                
+                                <Text 
+                                    text="차트 동적 생성" 
+                                    wrapping="true" />
+                            </VBox>
+                            <OverflowToolbar design="Solid" class="sapContrast">
+                                <ToolbarSpacer />
+                                <Button 
+                                    text="이동" 
+                                    type="Transparent"
+                                    press="onNextPage($event, 'DynamicCreate')">
+                                </Button>
+                            </OverflowToolbar>
+                        </VBox>
+                    </f:GridListItem>
+
+                    <!-- Draw chart when row is selected -->
+                    <f:GridListItem>
+                        <VBox height="100%" justifyContent="SpaceBetween">
+                            <layoutData>
+                                <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                            </layoutData>
+
+                            <VBox class="sapUiSmallMargin">
+                                <HBox alignItems="Center">
+                                    <core:Icon
+                                        src="sap-icon://touch"
+                                        size="2.625rem"
+                                        color="Default"
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginEnd" />
+                                    <Title text="Draw chart when row is selected" wrapping="true"/>
+                                </HBox>
+                                
+                                
+                                <Text 
+                                    text="테이블 행 선택시 해당 item 데이터로 차트 그리기" 
+                                    wrapping="true" />
+                            </VBox>
+                            <OverflowToolbar design="Solid" class="sapContrast">
+                                <ToolbarSpacer />
+                                <Button 
+                                    text="이동" 
+                                    type="Transparent"
+                                    press="onNextPage($event, 'TableAndChart')">
+                                </Button>
+                            </OverflowToolbar>
+                        </VBox>
+                    </f:GridListItem>
+                </f:GridList>
+
+                <f:GridList 
+                    headerText="Layout Control"
+                    inset="true">
+                    <f:customLayout>
+                        <grid:GridBoxLayout boxWidth="22.5rem" />
+                    </f:customLayout>
+
+                    <f:GridListItem>
+                        <VBox height="100%" justifyContent="SpaceBetween">
+                            <layoutData>
+                                <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                            </layoutData>
+
+                            <VBox class="sapUiSmallMargin">
+                                <HBox alignItems="Center">
+                                    <core:Icon
+                                        src="sap-icon://grid"
+                                        size="2.625rem"
+                                        color="Default"
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginEnd" />
+                                    <Title text="Grid Layout" wrapping="true"/>
+                                </HBox>
+
+                                <Text text="A great description with useful information about this project." wrapping="true" />
+                            </VBox>
+                            <OverflowToolbar design="Solid" class="sapContrast">
+                                <ToolbarSpacer />
+                                <Button 
+                                    text="이동" 
+                                    type="Transparent"
+                                    press="onNextPage($event, 'GridLayout')" />
+                            </OverflowToolbar>
+                        </VBox>
+                    </f:GridListItem>
+
+                    <f:GridListItem>
+                        <VBox height="100%" justifyContent="SpaceBetween">
+                            <layoutData>
+                                <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                            </layoutData>
+
+                            <VBox class="sapUiSmallMargin">
+                                <HBox alignItems="Center">
+                                    <core:Icon
+                                        src="sap-icon://pdf-attachment"
+                                        size="2.625rem"
+                                        color="Default"
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginEnd" />
+                                    <Title text="PDF" wrapping="true"/>
+                                </HBox>
+
+                                <Text text="" wrapping="true" />
+                            </VBox>
+                            <OverflowToolbar design="Solid" class="sapContrast">
+                                <ToolbarSpacer />
+                                <Button 
+                                    text="이동" 
+                                    type="Transparent"
+                                    press="onNextPage($event, 'PDFExample')" />
+                            </OverflowToolbar>
+                        </VBox>
+                    </f:GridListItem>
+                </f:GridList>
+
+            </Panel>
+        </f:content>
+        <!-- DynamicPage Footer -->
+        <f:footer>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

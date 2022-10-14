@@ -1,0 +1,213 @@
+{
+  "_version": "1.17.0",
+  "sap.app": {
+    "id": "sap.btp.usetemplate",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.7.1",
+      "toolsId": "8f411452-10eb-4dfe-8568-65b03ee7161d"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/Z_C_SALESORDER7_CDS/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.71.24",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "sap.btp.usetemplate.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      },
+      "app": {
+        "type": "sap.ui.model.json.JSONModel"
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ],
+      "js": [
+        {
+          "uri": "utils/jsPDF.js"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "sap.btp.usetemplate.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "Main",
+          "pattern": "",
+          "target": [
+            "MainView"
+          ]
+        },
+        {
+          "name": "DefaultChart",
+          "pattern": "defaultChart",
+          "target": [
+            "DefaultChartView"
+          ]
+        },
+        {
+          "name": "DynamicType",
+          "pattern": "dynamicType/{type}",
+          "target": [
+            "DynamicTypeView"
+          ]
+        },
+        {
+          "name": "GridLayout",
+          "pattern": "gridLayout",
+          "target": [
+            "GridLayoutView"
+          ]
+        },
+        {
+          "name": "DynamicCreate",
+          "pattern": "DynamicCreate",
+          "target": [
+            "DynamicCreateView"
+          ]
+        },
+        {
+          "name": "TableAndChart",
+          "pattern": "TableAndChart",
+          "target": [
+            "TableAndChartView"
+          ]
+        },
+        {
+          "name": "PDFExample",
+          "pattern": "PDFExample",
+          "target": [
+            "PDFExampleView"
+          ]
+        }
+      ],
+      "targets": {
+        "MainView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Main",
+          "viewName": "Main"
+        },
+        "DefaultChartView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "DefaultChart",
+          "viewName": "DefaultChart"
+        },
+        "DynamicTypeView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "DynamicType",
+          "viewName": "DynamicType"
+        },
+        "GridLayoutView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "GridLayout",
+          "viewName": "GridLayout"
+        },
+        "DynamicCreateView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "DynamicCreate",
+          "viewName": "DynamicCreate"
+        },
+        "TableAndChartView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "TableAndChart",
+          "viewName": "TableAndChart"
+        },
+        "PDFExampleView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "PDFExample",
+          "viewName": "PDFExample"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "sap.btp.usetemplate.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}
