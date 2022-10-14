@@ -1,0 +1,69 @@
+<mvc:View controllerName="sap.sync.sample.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:ui="sap.ui.table"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+                    <VBox>
+                        <Button text="2rd Screen" press="onNavToView2" />
+                        <Button text="3rd Screen" press="onNavToView3" />
+                    </VBox>
+                    <VBox>
+                            <!-- selectionMode="MultiToggle" -->
+                        <ui:Table
+                            id="uiTable"
+                            rows="{/students}"
+                            selectionMode="Single"
+                            visibleRowCount="7"
+                            ariaLabelledBy="title">
+                            <ui:extension>
+                                <OverflowToolbar style="Clear">
+                                    <Title id="title" text="성적표"/>
+                                    <Button text="평가" press="onCheck" />
+                                    <ToolbarSeparator/>
+                                    <ToolbarSpacer/>
+                                    <Input id="searchInput" width="20rem" submit="onSearch" value="{/searchValue}"/>
+                                    <Button text="추가" press="onRegistPopup"/>
+                                    <Button text="검색" press="onSearch"/>
+                                    <Button text="삭제" press="onDelete"/>
+                                </OverflowToolbar>
+                            </ui:extension>
+                            <ui:columns>
+                                <ui:Column width="11rem" filterProperty="name" sortProperty="name">
+                                    <Label text="이름" />
+                                    <ui:template>
+                                        <Text text="{name}" wrapping="false" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column width="11rem" filterProperty="score1" >
+                                    <Label text="국어" />
+                                    <ui:template>
+                                        <Text text="{score1}" wrapping="false" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column width="11rem" filterProperty="score2" >
+                                    <Label text="수학" />
+                                    <ui:template>
+                                        <Text text="{score2}" wrapping="false" />
+                                    </ui:template>
+                                </ui:Column>
+
+                                <ui:Column width="11rem" filterProperty="score2" >
+                                    <Label text="주소" />
+                                    <ui:template>
+                                        <Text text="{address}" wrapping="false" />
+                                    </ui:template>
+                                </ui:Column>
+
+                                <ui:Column width="11rem" >
+                                    <Label text="결과" />
+                                    <ui:template>
+                                        <Text text="{result}" wrapping="false" />
+                                    </ui:template>
+                                </ui:Column>
+                            </ui:columns>
+                        </ui:Table>
+                    </VBox>
+        </content>
+    </Page>
+</mvc:View>

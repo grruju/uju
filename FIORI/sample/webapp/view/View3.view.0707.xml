@@ -1,0 +1,230 @@
+<mvc:View controllerName="sap.sync.sample.controller.View3"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:core="sap.ui.core"
+    xmlns:ui="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:f="sap.f"
+    xmlns="sap.m">
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Header Title"/>
+					</f:heading>
+					<f:breadcrumbs>
+						<Breadcrumbs>
+							<Link text="Home" />
+							<Link text="Page 1" />
+							<Link text="Page 2" />
+							<Link text="Page 3" />
+							<Link text="Page 4" />
+							<Link text="Page 5" />
+						</Breadcrumbs>
+					</f:breadcrumbs>
+					<f:expandedContent>
+						<Label text="This is a subheading"/>
+					</f:expandedContent>
+					<f:snappedContent>
+						<Label text="This is a subheading"/>
+					</f:snappedContent>
+					<f:snappedTitleOnMobile>
+						<Title text="This is a subheading"/>
+					</f:snappedTitleOnMobile>
+					<f:content>
+						<OverflowToolbar>
+							<GenericTag text="SR"
+								status="Error"
+								press="onPressOpenPopover"
+								design="StatusIconHidden">
+								<ObjectNumber number="2"
+									unit="M"
+									emphasized="false"
+									state="Error"/>
+							</GenericTag>
+						</OverflowToolbar>
+					</f:content>
+					<f:actions>
+						<Button
+								text="Edit"
+								type="Emphasized"
+								press="toggleAreaPriority"/>
+						<Button
+								text="Delete"
+								type="Transparent"/>
+						<Button
+								text="Copy"
+								type="Transparent"/>
+						<Button
+								text="Toggle Footer"
+								type="Transparent"
+								press="onToggleFooter"/>
+						<Button
+								icon="sap-icon://action"
+								type="Transparent"/>
+						<Button
+								text="Button with layoutData"
+								type="Transparent"
+								press="onPressOpenPopover">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="AlwaysOverflow" closeOverflowOnInteraction="false" />
+							</layoutData>
+						</Button>
+					</f:actions>
+					<f:navigationActions>
+						<Button
+								icon="sap-icon://full-screen"
+								type="Transparent" />
+						<Button
+								icon="sap-icon://exit-full-screen"
+								type="Transparent" />
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" />
+					</f:navigationActions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<!-- DynamicPage Header -->
+			<f:header>
+				<f:DynamicPageHeader pinnable="true">
+					<layout:HorizontalLayout allowWrapping="true">
+						<layout:VerticalLayout class="sapUiMediumMarginEnd">
+							<ObjectAttribute title="Location" text="Warehouse A"/>
+							<ObjectAttribute title="Halway" text="23L"/>
+							<ObjectAttribute title="Rack" text="34"/>
+						</layout:VerticalLayout>
+
+						<layout:VerticalLayout>
+							<ObjectAttribute title="Availability"/>
+							<ObjectStatus text="In Stock" state="Success" />
+						</layout:VerticalLayout>
+					</layout:HorizontalLayout>
+				</f:DynamicPageHeader>
+			</f:header>
+			<f:content>
+				<Table id="idProductsTable"
+						sticky="HeaderToolbar,ColumnHeaders"
+						inset="false"
+						items="{
+							path: '/ProductCollection',
+							sorter: {
+								path: 'Name'
+							}
+						}"
+					   class="sapFDynamicPageAlignContent"
+					   width="auto">
+					<headerToolbar>
+						<Toolbar>
+							<Title text="Products" level="H2"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column
+								width="12em">
+							<Text text="Product" />
+						</Column>
+						<Column
+								minScreenWidth="Tablet"
+								demandPopin="true">
+							<Text text="Supplier" />
+						</Column>
+						<Column
+								minScreenWidth="Tablet"
+								demandPopin="true"
+								hAlign="End">
+							<Text text="Dimensions" />
+						</Column>
+						<Column
+								hAlign="End">
+							<Text text="Price" />
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<ObjectIdentifier
+										title="{Name}"
+										text="{ProductId}"/>
+								<Text
+										text="{SupplierName}" />
+								<Text
+										text="{Width} x {Depth} x {Height} {DimUnit}" />
+								<ObjectNumber
+										number="{
+											parts:[{path:'Price'},{path:'CurrencyCode'}],
+											type: 'sap.ui.model.type.Currency',
+											formatOptions: {showMeasure: false}
+										}"
+										unit="{CurrencyCode}" />
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</f:content>
+			<!-- DynamicPage Footer -->
+			<f:footer>
+				<OverflowToolbar>
+					<Button icon="sap-icon://message-popup"
+							text="{/messagesLength}"
+							type="Emphasized"
+							press="onMessageButtonPress"
+							visible="{= !!${/messagesLength}}"/>
+					<ToolbarSpacer/>
+					<Button type="Accept" text="Accept"/>
+					<Button type="Reject" text="Reject"/>
+				</OverflowToolbar>
+			</f:footer>
+		</f:DynamicPage>
+    <Page id="page" title="세번째 화면" showNavButton="true" navButtonPress="onNavBack" >
+        <content>
+            <VBox>
+                <HBox id="box1">
+                    <Input id="input1" width="10rem"  required="true" placeholder="필수"/>
+                    <Input id="input2" width="10rem"  required="false"/>
+                    <Input id="input3" width="10rem"  required="true" placeholder="필수"/> 
+                    <Button text= "제출" press="onCheck"/>
+                </HBox>
+                <Table id="table"
+                    items="{
+                        path: '/orders',
+                        sorter: 'orderNo'
+                    }">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                         <Title text="주문내역" level="H2"/>
+                         <ToolbarSpacer />
+                         <Button text="테이블세팅" press="onViewSetting" />
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                    <columns>
+                        <Column mergeDuplicates="false">
+                            <Text text="주문번호" />
+                        </Column>
+                        <!-- minScree`nWidth는 컬럼이 사라지는 크기를 정의 -->
+                        <!-- demandPopin 다른 컬럼으로 내용이 들어갈지, 아니면 사라질지 여부 체크 -->
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="상품" />
+                        </Column>
+                        <Column>
+                            <Text text="가격" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem 
+                        type="Navigation" press="onPressItem"
+                        vAlign="Middle">
+                            <cells>
+                                <Text text="{oderNo}"  wrapping="true"  />
+                                <Text text="{product}" />
+                                <Text text="{price}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                    <layoutData>
+                        <l:GridData span="L12 M6 S12" />
+                    </layoutData>
+                </Table>
+                
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

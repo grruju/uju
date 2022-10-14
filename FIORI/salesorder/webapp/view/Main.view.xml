@@ -1,0 +1,137 @@
+<mvc:View controllerName="salesorder.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Table growing="true" growingThreshold="5" id="table" inset="false" items="{
+                    path: '/SalesOrderSet'
+				}"
+                mode="SingleSelectMaster"
+                selectionChange="onSalesOrdersSelect"
+                delete="onDeleteData">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <Title text="Header" level="H2" />
+                            <Button icon="sap-icon://refresh" text="새로고침" press="onRefresh"/>
+				            <ToolbarSpacer/>
+                            <Button text="생성" visible="{= ${tog>/stat} === '__Normal' ? true : false }" press="onCreateMode"/>
+                            <Button text="수정" visible="{= ${tog>/stat} === '__Normal' ? true : false }" press="onEditMode"/>
+                            <Button text="저장" visible="{= ${tog>/stat} === '__Create' ? true : false }" press="onCreateData" type="Accept"/>
+                            <Button text="취소" visible="{= ${tog>/stat} === '__Create' ? true : false }" press="onCreateCancel" type="Reject"/>
+                            <Button text="저장" visible="{= ${tog>/stat} === '__Edit' ? true : false }" press="onUpdateData" type="Accept"/>
+                            <Button text="취소" visible="{= ${tog>/stat} === '__Edit' ? true : false }" press="onEditCancel" type="Reject"/>
+                            <ToolbarSeparator />
+                            <Button text="삭제" visible="{= ${tog>/stat} === '__Normal' ? true : false }" press="onDeleteMode" type="Reject"/>
+                            <Button text="취소" visible="{= ${tog>/stat} === '__Delete' ? true : false }" press="onDeleteCancel" type="Reject"/>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="ORDER NUMBER" />
+                    </Column>
+                    <Column>
+                        <Text text="order type" />
+                    </Column>
+                    <Column>
+                        <Text text="CUSTOMER NAME" />
+                    </Column>
+                    <Column>
+                        <Text text="CUSTOMER NUMBER" />
+                    </Column>
+                    <Column>
+                        <Text text="ORDER DATE" />
+                    </Column>
+                    <Column>
+                        <Text text="Delivery Date" />
+                    </Column>
+                    <Column>
+                        <Text text="Person In Charge" />
+                    </Column>
+                    <Column>
+                        <Text text="STATUS" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem vAlign="Middle">
+                        <cells>
+                            <Text text="{Ornum}" />
+                            <Text text="{Ortype}" />
+                            <Input class="TextInput" value="{Vencd}" editable="false"/>
+                            <Input class="TextInput" value="{Vennm}" editable="false"/>
+                            <Text text="{ path: 'Ordat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd', UTC: true } }" />
+                            <Text text="{ path: 'Drdat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd', UTC: true } }" />
+                            <!-- <Text text="{ path: 'Erzet', type: 'sap.ui.model.odata.type.Time'}" /> -->
+                            <Text text="{Empnm}" />
+                            <Text text="{Stats}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+            <Table growing="true" growingThreshold="5" id="table2" inset="false" items="{
+                    path: '/SalesOrderItemSet'
+                }"
+                mode="SingleSelectMaster"
+                selectionChange="onSalesOrderItemsSelect"
+                delete="onItemDeleteData">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <Title text="Item" level="H2" />
+                            <ToolbarSpacer/>
+                            <Button text="생성" visible="{= ${tog>/stat} === '__Normal' ? true : false }" press="onItemCreateMode"/>
+                            <Button text="수정" visible="{= ${tog>/stat} === '__Normal' ? true : false }" press="onItemEditMode"/>
+                            <Button text="저장" visible="{= ${tog>/stat} === '__CreateItem' ? true : false }" press="onItemCreateData" type="Accept"/>
+                            <Button text="취소" visible="{= ${tog>/stat} === '__CreateItem' ? true : false }" press="onItemCreateCancel" type="Reject"/>
+                            <Button text="저장" visible="{= ${tog>/stat} === '__EditItem' ? true : false }" press="onItemUpdateData" type="Accept"/>
+                            <Button text="취소" visible="{= ${tog>/stat} === '__EditItem' ? true : false }" press="onItemEditCancel" type="Reject"/>
+                            <ToolbarSeparator />
+                            <Button text="삭제" visible="{= ${tog>/stat} === '__Normal' ? true : false }" press="onItemDeleteMode" type="Reject"/>
+                            <Button text="취소" visible="{= ${tog>/stat} === '__DeleteItem' ? true : false }" press="onItemDeleteCancel" type="Reject"/>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="ORDER NUMBER" />
+                    </Column>
+                    <Column>
+                        <Text text="ITEM NUM" />
+                    </Column>
+                    <Column>
+                        <Text text="Material Number" />
+                    </Column>
+                    <Column>
+                        <Text text="ITEM NAME" />
+                    </Column>
+                    <Column>
+                        <Text text="MEINM" />
+                    </Column>
+                    <Column>
+                        <Text text="unit-of-measure" />
+                    </Column>
+                    <Column>
+                        <Text text="PRICE" />
+                    </Column>
+                    <Column>
+                        <Text text="currency-code" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem vAlign="Middle">
+                        <cells>
+                            <Text text="{Ornum}" />
+                            <Text text="{Itmnm}" />
+                            <Input class="TextInput" value="{Matcd}" editable="false"/>
+                            <Input class="TextInput" value="{Matnm}" editable="false"/>
+                            <Input class="TextInput" value="{Meinm}" editable="false"/>
+                            <Input class="TextInput" value="{Meins}" editable="false"/>
+                            <Input class="TextInput" value="{Price}" editable="false"/>
+                            <Input class="TextInput" value="{Waers}" editable="false"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+        </content>
+    </Page>
+</mvc:View>

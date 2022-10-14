@@ -1,0 +1,31 @@
+<mvc:View controllerName="project1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:up="sap.m.upload">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <VBox id="rteContainer"/>
+            <core:HTML content="{view>/htmlContent}"/>
+            <Text text="{view>/htmlContent}"/>
+    
+            <Button text="저장" press="onPress"/>
+            <up:UploadSet id="uploadSet" 
+                beforeUploadStarts="onBeforeUpload"
+                beforeItemRemoved="onDeleteFile"
+                uploadUrl="/sap/opu/odata/sap/ZGWSALESB01_SRV/AttachmentSet"
+                items="{ path: '/AttachmentSet',
+                         filters: [
+                            {path: 'Id', operator: 'EQ', value1: 'cl201'}
+                         ]
+                        }">
+                    <up:items>
+                        <up:UploadSetItem fileName="{Filename}"
+                            mediaType="{Mimetype}" url="{Downurl}"
+                        />
+                    </up:items>
+
+            </up:UploadSet>
+        </content>
+    </Page>
+</mvc:View>

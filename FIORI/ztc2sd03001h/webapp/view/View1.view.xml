@@ -1,0 +1,75 @@
+<mvc:View controllerName="ztc2sd03001h.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    height="100%">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <VBox>
+                <Table growing="true" growingThreshold="5" id="SalesOrders"
+                    items="{path : '/SalesOrderSet',
+                            parameters : {
+                                $count : true,
+                                $expand : { to_Item : {
+                                    $select : ['Ornum', 'Itmnm', 'Matnr',
+                                        'Price']
+                                }},
+                                $select : ['Ornum', 'Ortype', 'CustDna'],
+                                $filter : 'SalesOrder ge \'500000000\''
+                        }}"
+                    mode="SingleSelectMaster"
+                    selectionChange="onSalesOrdersSelect">
+                    <headerToolbar>
+                        <Toolbar>
+                            <Title id="SalesOrdersTitle" text="{$count} Sales Orders" titleStyle="H2"/>
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Text text="SalesOrder ID"/>
+                        </Column>
+                        <Column>
+                            <Text text="Customer"/>
+                        </Column>
+                        <Column>
+                            <Text text="OverallStatus"/>
+                        </Column>
+                    </columns>
+                    <ColumnListItem>
+                        <Text text="{Ornum}"/>
+                        <Text text="{Ortype}"/>
+                        <Text text="{Custna}"/>
+                    </ColumnListItem>
+                </Table>
+                <Table growing="true" growingThreshold="5" id="SalesOrderItems"
+                    items="{/SalesOrderItemSet}"
+                    mode="SingleSelectMaster">
+                    <headerToolbar>
+                        <Toolbar>
+                            <Title text="Sales Order Items" titleStyle="H2"/>
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Text text="SalesOrder"/>
+                        </Column>
+                        <Column>
+                            <Text text="SalesOrderItem"/>
+                        </Column>
+                        <Column>
+                            <Text text="Product"/>
+                        </Column>
+                        <Column>
+                            <Text text="GrossAmount"/>
+                        </Column>
+                    </columns>
+                    <ColumnListItem>
+                        <Text text="{Ornum}"/>
+                        <Text text="{Itmnm}"/>
+                        <Text text="{Matnr}"/>
+                        <Text text="{Price}"/>
+                    </ColumnListItem>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

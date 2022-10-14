@@ -1,0 +1,139 @@
+<mvc:View controllerName="sap.sync.sample.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:core="sap.ui.core"
+    xmlns:ui="sap.ui.table" xmlns:f="sap.ui.layout.form"  xmlns:l="sap.ui.layout"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <f:SimpleForm id="SimpleForm1"
+                layout="ResponsiveGridLayout"
+                title="Input">
+                <f:content>
+                    <VBox>
+                        <Label text="숫자1"/>
+                        <Input id="input1" type="Number" value="{/sValue1}"/>
+                        <layoutData>
+                            <l:GridData span="L2 M2 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label  text="숫자2"/>
+                        <Input id="input2" type="Number"  value="{/sValue2}"/>
+                        <layoutData>
+                            <l:GridData span="L2 M2 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <!-- <Label  text=""/> -->
+                        <Button id="calc" text="아이디" press="onTestbyId" />
+                        <Button text="모델" press="onTestModel" />
+                        <layoutData>
+                            <l:GridData span="L1 M1 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label  text="비교"/>
+                        <Input id="result" value="{/sResult}" />
+                        <layoutData>
+                            <l:GridData span="L2 M2 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label  text="비교2"/>
+                        <Input id="result2"/>
+                        <layoutData>
+                            <l:GridData span="L2 M2 S12" />
+                        </layoutData>
+                    </VBox>
+                </f:content>
+            </f:SimpleForm>
+            <f:SimpleForm>
+            <f:content>
+                <VBox>
+                    <DatePicker id="date" change="onDateChange" valueFormat="yy-mm-dd" />
+                    <layoutData>
+                        <l:GridData span="L2 M2 S12" />
+                    </layoutData>
+                </VBox>
+                <VBox>
+                    <Text text="{/dateString}" />
+                    <layoutData>
+                        <l:GridData span="L2 M2 S12" />
+                    </layoutData>
+                </VBox>
+            </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm id="SimpleForm2"
+                layout="ResponsiveGridLayout"
+                title="Input">
+                <f:content>
+                    <VBox>
+                        <Label text="단수"/>
+                        <Input id="input10" type="Number" value="{/sValue10}"/>
+                        <layoutData>
+                            <l:GridData span="L2 M2 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label  text=""/>
+                        <Button text="구구단" press="onSuccessMessageBoxPress" />
+                        <layoutData>
+                            <l:GridData span="L1 M1 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label  text=""/>
+                        <Button text="구구단2" press="onCalc" />
+                        <layoutData>
+                            <l:GridData span="L1 M1 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label  text=""/>
+                        <Button text="구구단3" press="onStar" />
+                        <layoutData>
+                            <l:GridData span="L1 M1 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <TextArea value="{/TextArea}" rows="10" />
+                    </VBox>
+                </f:content>
+            </f:SimpleForm>
+            
+            <f:SimpleForm id="SimpleForm3"
+                layout="ResponsiveGridLayout"
+                title="Input">
+                <f:content>
+                    <VBox>
+                        <List
+                            id="idList"
+                            items="{/results}">
+                            <StandardListItem title="{string}" />
+                        </List>
+                        <layoutData>
+                            <l:GridData span="L1 M1 S12" />
+                        </layoutData>
+                    </VBox>
+                </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm id="SimpleForm4"
+                layout="ResponsiveGridLayout"
+                title="Input">
+                <f:content>
+                    <VBox>
+                        <List
+                            id="idList2"
+                            items="{/results2}">
+                            <StandardListItem title="{string2}" />
+                        </List>
+                        <layoutData>
+                            <l:GridData span="L1 M1 S12" />
+                        </layoutData>
+                    </VBox>
+                </f:content>
+            </f:SimpleForm>
+        </content>
+    </Page>
+</mvc:View>
