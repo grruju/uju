@@ -39,7 +39,7 @@ sap.ui.define([
 							"tiles": [{
 								"tileType": "sap.ushell.ui.tile.StaticTile",
 								"properties": {
-									"title": "App Title",
+									"title": "제품 판매 현황",
 									"targetURL": "#syncc203salesorderchart-display"
 								}
 							}]

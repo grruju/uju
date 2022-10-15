@@ -25,7 +25,7 @@ sap.ui.define([
              */
             _setInitModel: function() {
                 let aChartType = this._getChartType();
-
+                debugger;
                 this.getView()
                     .setModel(
                         new JSONModel({

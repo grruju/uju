@@ -37,6 +37,7 @@ sap.ui.define([
              * @returns {object}
              */
             _getNavDefaultSetting: function(sName){
+                debugger;
                 let oParameter = {};
 
                 switch (sName) {
