@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="http://edu.bgis.co.kr:8001/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://edu.bgis.co.kr:8001/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://edu.bgis.co.kr:8001/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://edu.bgis.co.kr:8001/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://edu.bgis.co.kr:8001/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZI_SPFLI_DETAILS_CDS" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="SCARRType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CARRID"/>
+                </Key>
+                <Property Name="CARRID" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Airline"/>
+                <Property Name="CARRNAME" Type="Edm.String" MaxLength="20" sap:label="Airline"/>
+                <Property Name="CURRCODE" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:semantics="currency-code"/>
+                <Property Name="URL" Type="Edm.String" MaxLength="255" sap:label="URL"/>
+            </EntityType>
+            <EntityType Name="ZI_SPFLI_DETAILSType" sap:label="SPFLI DETAILS" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Carrid"/>
+                    <PropertyRef Name="Connid"/>
+                </Key>
+                <Property Name="Carrid" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:text="AirlineName" sap:label="Airline" sap:quickinfo="Airline Code"/>
+                <Property Name="Connid" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Connection Number" sap:quickinfo="Flight Connection Number"/>
+                <Property Name="AirlineName" Type="Edm.String" MaxLength="20" sap:label="Airline" sap:quickinfo="Airline name"/>
+                <Property Name="airpfrom" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:text="cityfrom" sap:label="Departure airport"/>
+                <Property Name="cityfrom" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Depart. city" sap:quickinfo="Departure city"/>
+                <Property Name="airpto" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:text="cityto" sap:label="Destination airport"/>
+                <Property Name="cityto" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Arrival city"/>
+                <Property Name="deptime" Type="Edm.Time" Precision="0" sap:label="Departure time"/>
+                <Property Name="arrtime" Type="Edm.Time" Precision="0" sap:label="Arrival Time" sap:quickinfo="Arrival time"/>
+                <Property Name="distance" Type="Edm.Decimal" Precision="9" Scale="4" sap:label="Distance"/>
+                <NavigationProperty Name="to_Carrier" Relationship="ZI_SPFLI_DETAILS_CDS.assoc_1B87EA9E71EAED59709ECDA3F20CF983" FromRole="FromRole_assoc_1B87EA9E71EAED59709ECDA3F20CF983" ToRole="ToRole_assoc_1B87EA9E71EAED59709ECDA3F20CF983"/>
+            </EntityType>
+            <Association Name="assoc_1B87EA9E71EAED59709ECDA3F20CF983" sap:content-version="1">
+                <End Type="ZI_SPFLI_DETAILS_CDS.ZI_SPFLI_DETAILSType" Multiplicity="1" Role="FromRole_assoc_1B87EA9E71EAED59709ECDA3F20CF983"/>
+                <End Type="ZI_SPFLI_DETAILS_CDS.SCARRType" Multiplicity="0..1" Role="ToRole_assoc_1B87EA9E71EAED59709ECDA3F20CF983"/>
+            </Association>
+            <EntityContainer Name="ZI_SPFLI_DETAILS_CDS_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="SCARR" EntityType="ZI_SPFLI_DETAILS_CDS.SCARRType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_SPFLI_DETAILS" EntityType="ZI_SPFLI_DETAILS_CDS.ZI_SPFLI_DETAILSType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <AssociationSet Name="assoc_1B87EA9E71EAED59709ECDA3F20CF983" Association="ZI_SPFLI_DETAILS_CDS.assoc_1B87EA9E71EAED59709ECDA3F20CF983" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZI_SPFLI_DETAILS" Role="FromRole_assoc_1B87EA9E71EAED59709ECDA3F20CF983"/>
+                    <End EntitySet="SCARR" Role="ToRole_assoc_1B87EA9E71EAED59709ECDA3F20CF983"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations Target="ZI_SPFLI_DETAILS_CDS.ZI_SPFLI_DETAILS_CDS_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="None"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="http://edu.bgis.co.kr:8001/sap/opu/odata/sap/ZI_SPFLI_DETAILS_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://edu.bgis.co.kr:8001/sap/opu/odata/sap/ZI_SPFLI_DETAILS_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
