@@ -17,7 +17,7 @@ pyinstaller --onefile --noconsole linw_v2.py
 # PyQt 파일(.ui) 파이썬으로 컴파일(.py)
 PyQt 파일(.ui) 컴파일 방법
 pyuic5 -x ./변환할 파일이름.ui -o ./변환될 파일이름.py
-
+#
 '''
 
 pyinstaller -w -F ./python/lineagetest.py
